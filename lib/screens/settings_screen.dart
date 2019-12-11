@@ -29,7 +29,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         child: Column(
           children: <Widget>[
 
-            Container(
+            /*Container(
               margin: EdgeInsets.only(bottom: 20),
               decoration: BoxDecoration(
                 border: Border(
@@ -55,7 +55,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                 ],
               ),
-            ),
+            ),*/
 
             Container(
               width: double.infinity,

@@ -13,6 +13,7 @@ import '../widgets/loading.dart';
 import '../widgets/loading_infinite.dart';
 import '../widgets/carousel.dart';
 import 'single_post.dart';
+import 'package:flutter_native_admob/flutter_native_admob.dart';
 
 class SingleCategorySliderScreen extends StatefulWidget {
   final CategoryModel category;
@@ -34,13 +35,14 @@ class _SingleCategorySliderScreenState
   List<PostModel> posts = [];
   List<PostModel> featured = [];
   InterstitialAd myInterstitial;
+  NativeAdmob myNativeAd=NativeAdmob();
 
   void initState() {
     super.initState();
 
      myInterstitial=InterstitialAd(
-      //adUnitId: Config.adMobAdUnitID,
-       adUnitId: InterstitialAd.testAdUnitId,
+      adUnitId: Config.adMobAdUnitID,
+       //adUnitId: InterstitialAd.testAdUnitId,
       listener: (MobileAdEvent event) {
         print("IntAd event is $event");
         if(event==MobileAdEvent.loaded){
@@ -48,6 +50,8 @@ class _SingleCategorySliderScreenState
         }
       },
     );
+
+    myNativeAd.initialize(appID: Config.adMobAndroidID);
 
     /// load posts
     _loadData();
@@ -79,7 +83,7 @@ class _SingleCategorySliderScreenState
         ..show();
     });
 
-    if(noOfClicks==3){
+    if(noOfClicks==4){
 
 
       myInterstitial
@@ -174,6 +178,22 @@ class _SingleCategorySliderScreenState
                 ],
               ),
 
+              Padding(
+                padding: const EdgeInsets.only(bottom:10.0,left: 10,right: 10),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(3)),
+                  ),
+                  child: NativeAdmobBannerView(
+                    adUnitID: Config.nativeAdUnitID,
+                    //adUnitID: Config.nativeTestAdUnitID,
+                    showMedia: false,
+                    style: BannerStyle.light,
+                    contentPadding: EdgeInsets.all(5.0),
+                  ),
+                ),
+              ),
+
               GridView.builder(
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 itemCount: posts.length,
@@ -193,6 +213,21 @@ class _SingleCategorySliderScreenState
                       builder: (context) => SinglePost(posts[index]),
                     ));
                   },
+                ),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.only(bottom:10.0,left: 10,right: 10),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(3)),
+                  ),
+                  child: NativeAdmobBannerView(
+                    adUnitID: Config.nativeAdUnitID,
+                    showMedia: false,
+                    style: BannerStyle.light,
+                    contentPadding: EdgeInsets.all(5.0),
+                  ),
                 ),
               ),
 

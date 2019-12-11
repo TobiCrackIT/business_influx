@@ -1,4 +1,4 @@
-package com.example.deco_news
+package com.businessinflux.business_influx
 
 import android.os.Bundle
 

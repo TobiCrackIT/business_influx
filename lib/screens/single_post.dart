@@ -1,15 +1,18 @@
 import 'dart:convert';
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/image_properties.dart';
 import 'package:share/share.dart';
+import '../config.dart';
 import '../helpers/wordpress.dart';
 import '../widgets/deco_scroll.dart';
 import '../widgets/news.dart';
 import '../models/post_model.dart';
 import '../deco_news_icons.dart';
 import 'comments_screen.dart';
+import 'package:flutter_native_admob/flutter_native_admob.dart';
 
 class SinglePost extends StatefulWidget {
   final PostModel post;
@@ -24,6 +27,7 @@ class SinglePost extends StatefulWidget {
 class _SinglePostState extends State<SinglePost> {
   bool isLoading = true;
   List<PostModel> posts = [];
+  NativeAdmob myNativeAd=NativeAdmob();
 
   @override
   void initState() {
@@ -186,6 +190,22 @@ class _SinglePostState extends State<SinglePost> {
                 ),
               ],
             )),
+
+        Padding(
+          padding: const EdgeInsets.only(top:10.0,),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(3)),
+            ),
+            child: NativeAdmobBannerView(
+              adUnitID: Config.nativeAdUnitID,
+              showMedia: false,
+              style: BannerStyle.light,
+              //contentPadding: EdgeInsets.all(5.0),
+            ),
+          ),
+        ),
+
         posts.length == 0
             ? Container()
             : Column(
@@ -221,6 +241,21 @@ class _SinglePostState extends State<SinglePost> {
                       }),
                 ],
               ),
+
+        Padding(
+          padding: const EdgeInsets.only(top:10.0,),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(3)),
+            ),
+            child: NativeAdmobBannerView(
+              adUnitID: Config.nativeAdUnitID,
+              showMedia: false,
+              style: BannerStyle.light,
+              //contentPadding: EdgeInsets.all(5.0),
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -297,28 +332,6 @@ class _SinglePostState extends State<SinglePost> {
               ),
             ),
           ),
-          /*FlatButton(
-            onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => CommentsScreen(this.widget.post.id),
-            )),
-            child: Row(
-              children: <Widget>[
-                Icon(
-                  DecoNewsIcons.comments,
-                  color: Color(0xFFCCCBDA),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 8.0),
-                  child: Text(
-                    'Comments',
-                    style: TextStyle(
-                      color: Color(0xFF7F7E96),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          )*/
         ],
       ),
     );
@@ -353,5 +366,26 @@ class _SinglePostState extends State<SinglePost> {
     } else {
       throw Exception('Failed to load data');
     }
+  }
+
+  loadAds(){
+
+    myNativeAd.initialize(appID: Config.adMobAndroidID);
+
+    BannerAd myBanner = BannerAd(
+      adUnitId: Config.bannerAdUnitID,
+      //adUnitId: BannerAd.testAdUnitId,
+      size: AdSize.smartBanner,
+      listener: (MobileAdEvent event) {
+        print("BannerAd event is $event");
+        //if(event==MobileEv)
+      },
+    );
+
+    myBanner
+      ..load()
+      ..show(anchorType: Config.adMobPosition != 'top' ? AnchorType.bottom : AnchorType.top);
+
+
   }
 }

@@ -1,17 +1,9 @@
-import 'dart:convert';
 import 'package:deco_news/config.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_admob/firebase_admob.dart';
-import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:io' show Platform;
-import 'helpers/wordpress.dart';
-import 'models/post_model.dart';
-import 'models/category_model.dart';
-import 'helpers/helpers.dart';
 import 'screens/home_screen.dart';
-import 'screens/single_post.dart';
 
 void main() => runApp(DecoNews());
 
@@ -114,14 +106,14 @@ class _DecoNewsState extends State<DecoNews> {
 
     firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
-        print('on message $message');
+        //print('on message $message');
       },
       onResume: (Map<String, dynamic> message) async {
-        print('on resume $message');
+        //print('on resume $message');
         //_processPushNotification(message);
       },
       onLaunch: (Map<String, dynamic> message) async {
-        print('on launch $message');
+        //print('on launch $message');
         //_processPushNotification(message);
       },
     );
@@ -201,6 +193,7 @@ class _DecoNewsState extends State<DecoNews> {
   }
 
   /// Init AdMob
+  /// Init AdMob
   _initAdMob() {
     if (!Config.adMobEnabled) {
       return;
@@ -208,36 +201,38 @@ class _DecoNewsState extends State<DecoNews> {
 
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     FirebaseAdMob.instance.initialize(
-      appId: isIOS ? Config.adMobiOSAppID : Config.adMobAndroidID
+        appId: isIOS ? Config.adMobiOSAppID : Config.adMobAndroidID
     );
 
-    /*BannerAd myBanner = BannerAd(
-      // Replace the testAdUnitId with an ad unit id from the AdMob dash.
-      // https://developers.google.com/admob/android/test-ads
-      // https://developers.google.com/admob/ios/test-ads
-      adUnitId: BannerAd.testAdUnitId,
+    BannerAd myBanner = BannerAd(
+      adUnitId: Config.bannerAdUnitID,
+      //adUnitId: BannerAd.testAdUnitId,
       size: AdSize.smartBanner,
       listener: (MobileAdEvent event) {
         print("BannerAd event is $event");
+        //if(event==MobileEv)
       },
-    );*/
+    );
 
     InterstitialAd myInterstitial =InterstitialAd(
-      //adUnitId: 'ca-app-pub-4032939027466706/3858252094',
-      adUnitId: InterstitialAd.testAdUnitId,
+      adUnitId: Config.interstitialAdUnitID,
+      //adUnitId: InterstitialAd.testAdUnitId,
       listener: (MobileAdEvent event) {
-        print("IntAd event is $event");
+        print("InterstitialAd event is $event");
         if(event==MobileAdEvent.loaded){
 
         }
       },
     );
 
+
+
+
     /// load banner
-    /*myBanner
+    myBanner
       ..load()
-      ..show(anchorType: Config.adMobPosition != 'top' ? AnchorType.bottom : AnchorType.top);*/
-    
+      ..show(anchorType: Config.adMobPosition != 'top' ? AnchorType.bottom : AnchorType.top);
+
     Future.delayed(const Duration(minutes: 4),(){
       myInterstitial
         ..load()

@@ -24,4 +24,8 @@ class Config {
   static final adMobAndroidID='ca-app-pub-4032939027466706~1152197705'; //mine
   static final adMobAdUnitID = 'ca-app-pub-4032939027466706/3858252094';
   static final adMobPosition = 'bottom';
+  static final interstitialAdUnitID='ca-app-pub-4032939027466706/3858252094';
+  static final bannerAdUnitID='ca-app-pub-4032939027466706/6923399138';
+  static final nativeAdUnitID='ca-app-pub-4032939027466706/4205983878';
+  static final nativeTestAdUnitID='ca-app-pub-3940256099942544/2247696110';
 }
