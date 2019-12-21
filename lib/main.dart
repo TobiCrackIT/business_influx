@@ -1,9 +1,14 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:deco_news/config.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:firebase_admob/firebase_admob.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'screens/home_screen.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
+import 'package:animated_splash/animated_splash.dart';
 
 void main() => runApp(DecoNews());
 
@@ -30,6 +35,7 @@ class _DecoNewsState extends State<DecoNews> {
 
   /// Firebase messaging
   static FirebaseMessaging firebaseMessaging = new FirebaseMessaging();
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin=new FlutterLocalNotificationsPlugin();
 
   @override
   void initState() {
@@ -41,6 +47,7 @@ class _DecoNewsState extends State<DecoNews> {
 
     /// init push notifications
     _initPushNotifications();
+    configLocalNotifications();
 
     /// init AdMob
     _initAdMob();
@@ -106,14 +113,37 @@ class _DecoNewsState extends State<DecoNews> {
 
     firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
-        //print('on message $message');
+        print('On message : $message');
+        showNotification(message);
+        return;
+        /*setState(() {
+
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              content: ListTile(
+                title: Text(message['notification']['title']),
+                subtitle: Text(message['notification']['body']),
+              ),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text('Ok'),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+              ],
+            ),
+          );
+
+        });*/
+
+
       },
       onResume: (Map<String, dynamic> message) async {
-        //print('on resume $message');
+        print('On Resume $message');
         //_processPushNotification(message);
       },
       onLaunch: (Map<String, dynamic> message) async {
-        //print('on launch $message');
+        print('On Launch $message');
         //_processPushNotification(message);
       },
     );
@@ -124,6 +154,7 @@ class _DecoNewsState extends State<DecoNews> {
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     firebaseMessaging.getToken().then((token){
+      print('FCM Token: ${token.toString()}');
       if (prefs.getBool('isPushNotificationEnabled') ?? true) {
         //setSubscription(true);
       }
@@ -233,13 +264,53 @@ class _DecoNewsState extends State<DecoNews> {
       ..load()
       ..show(anchorType: Config.adMobPosition != 'top' ? AnchorType.bottom : AnchorType.top);
 
-    Future.delayed(const Duration(minutes: 4),(){
+    Future.delayed(const Duration(minutes: 2),(){
       myInterstitial
         ..load()
         ..show();
     });
 
 
+  }
+
+  void configLocalNotifications(){
+    var initializeAndroidSettings=new AndroidInitializationSettings('app_icon');
+    var initializeIOSSettings=new IOSInitializationSettings();
+    var initializationSettings=new InitializationSettings(initializeAndroidSettings, initializeIOSSettings);
+    flutterLocalNotificationsPlugin.initialize(initializationSettings);
+  }
+
+  void showNotification(message) async{
+    var androidPlatformChannelSpecifics=new AndroidNotificationDetails(
+        Platform.isAndroid?"com.businessinflux.business_influx":"com.businessinflux.business_influx",
+        'Business Influx News',
+        'Business Influx News Notification',
+        playSound: true,
+        enableVibration: true,
+        //enableLights: true,
+        importance: Importance.Max,
+        priority: Priority.High
+    );
+
+    var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
+    var platformChannelSpecifics =
+    new NotificationDetails(androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+    await flutterLocalNotificationsPlugin.show(
+        0, message['notification']['title'].toString(), message['notification']['body'].toString(), platformChannelSpecifics,
+        payload: json.encode(message));
+  }
+
+  void initializeOneSignal() async{
+    OneSignal.shared.init('0581e55f-862c-402a-a5cb-43e66cec5b73');
+
+
+
+    bool allowed = await OneSignal.shared.promptUserForPushNotificationPermission();
+    if(allowed==false){
+      OneSignal.shared.promptUserForPushNotificationPermission();
+    }
+
+    OneSignal.shared.setInFocusDisplayType(OSNotificationDisplayType.notification);
   }
 
 

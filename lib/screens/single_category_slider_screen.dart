@@ -77,7 +77,7 @@ class _SingleCategorySliderScreenState
       return Loading();
     }
 
-    Future.delayed(const Duration(minutes: 5),(){
+    Future.delayed(const Duration(minutes: 2),(){
       myInterstitial
         ..load()
         ..show();

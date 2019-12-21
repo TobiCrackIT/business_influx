@@ -64,6 +64,7 @@ class PostModel {
 
     if (image == null) {
       image = AssetImage('images/image_placeholder.png');
+
     }
 
     return image;
