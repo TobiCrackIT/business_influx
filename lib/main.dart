@@ -8,7 +8,7 @@ import 'package:firebase_admob/firebase_admob.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'screens/home_screen.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
-import 'package:animated_splash/animated_splash.dart';
+import 'package:flare_splash_screen/flare_splash_screen.dart';
 
 void main() => runApp(DecoNews());
 
@@ -31,7 +31,6 @@ class _DecoNewsState extends State<DecoNews> {
 
   /// Theme brightness
   Brightness _brightness;
-  String _message='Message';
 
   /// Firebase messaging
   static FirebaseMessaging firebaseMessaging = new FirebaseMessaging();
@@ -116,25 +115,6 @@ class _DecoNewsState extends State<DecoNews> {
         print('On message : $message');
         showNotification(message);
         return;
-        /*setState(() {
-
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              content: ListTile(
-                title: Text(message['notification']['title']),
-                subtitle: Text(message['notification']['body']),
-              ),
-              actions: <Widget>[
-                FlatButton(
-                  child: Text('Ok'),
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-              ],
-            ),
-          );
-
-        });*/
 
 
       },
@@ -230,9 +210,10 @@ class _DecoNewsState extends State<DecoNews> {
       return;
     }
 
-    bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
+    //bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     FirebaseAdMob.instance.initialize(
-        appId: isIOS ? Config.adMobiOSAppID : Config.adMobAndroidID
+        //appId: isIOS ? Config.adMobiOSAppID : Config.adMobAndroidID
+      appId: Config.adMobAndroidID
     );
 
     BannerAd myBanner = BannerAd(
@@ -296,7 +277,7 @@ class _DecoNewsState extends State<DecoNews> {
     var platformChannelSpecifics =
     new NotificationDetails(androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
     await flutterLocalNotificationsPlugin.show(
-        0, message['notification']['title'].toString(), message['notification']['body'].toString(), platformChannelSpecifics,
+        0, message['notification']['title'].toString()=='null'?"Business Influx News":message['notification']['title'].toString(), message['notification']['body'].toString(), platformChannelSpecifics,
         payload: json.encode(message));
   }
 
@@ -315,3 +296,89 @@ class _DecoNewsState extends State<DecoNews> {
 
 
 }
+
+class SplashView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new MaterialApp(
+      color: Colors.white,
+      home: SplashScreen(
+        'images/binsplash.flr',
+        DecoNews(),
+        backgroundColor: Colors.white,
+      )
+    );
+  }
+}
+
+
+/*class SplashScreen extends StatefulWidget {
+  @override
+  _SplashScreenState createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Future.delayed(Duration(seconds: 2),(){
+      Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => DecoNews(),
+          )
+      );
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            AnimatedCrossFade(
+                firstChild: Container(
+                  child: FlutterLogo(
+                    size: 80,
+                  ),
+                ),
+                secondChild: Container(
+                  child: FlutterLogo(
+                    size: 150,
+                  ),
+                ),
+                crossFadeState: CrossFadeState.showFirst,
+                duration: Duration(seconds: 4)
+            )
+          ],
+        ),
+      ),
+    );
+    *//*return Animator(
+      tween: Tween<double>(begin: 0,end: 300),
+      duration: Duration(seconds: 3),
+      cycles: 1,
+      builder: (anim)=>Center(
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 10),
+          height: 50*anim.value,
+          width: 50*anim.value,
+          child: Image.asset('images/bi_logo.png',height: 50,width: 50,),
+        ),
+      ),
+    );*//*
+  }
+
+}*/
+
+
+
+
+
+
