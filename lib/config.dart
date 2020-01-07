@@ -20,12 +20,12 @@ class Config {
   static final adMobEnabled = true;
   static final adMobiOSAppID = 'ca-app-pub-7868270859526221~2024798504';
   //static final adMobAndroidID = 'ca-app-pub-7868270859526221~7198068286';
-  //static final adMobAndroidID='ca-app-pub-3940256099942544/1033173712'; //test
-  static final adMobAndroidID='ca-app-pub-4032939027466706~1152197705'; //mine
-  static final adMobAdUnitID = 'ca-app-pub-4032939027466706/3858252094';
+  static final adMobAndroidID='ca-app-pub-8950463783824302~2542988770';
+  //static final adMobAdUnitID = 'ca-app-pub-4032939027466706/3858252094';
   static final adMobPosition = 'bottom';
-  static final interstitialAdUnitID='ca-app-pub-4032939027466706/3858252094';
-  static final bannerAdUnitID='ca-app-pub-4032939027466706/6923399138';
-  static final nativeAdUnitID='ca-app-pub-4032939027466706/4205983878';
+  //static final bannerAdUnitID='ca-app-pub-4032939027466706/6923399138';
+  static final bannerAdUnitID='ca-app-pub-8950463783824302/6211960411';
+  static final interstitialAdUnitID='ca-app-pub-8950463783824302/7844606286';
+  static final nativeAdUnitID='ca-app-pub-8950463783824302/2535249918';
   static final nativeTestAdUnitID='ca-app-pub-3940256099942544/2247696110';
 }

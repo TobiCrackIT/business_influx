@@ -41,7 +41,7 @@ class _SingleCategorySliderScreenState
     super.initState();
 
      myInterstitial=InterstitialAd(
-      adUnitId: Config.adMobAdUnitID,
+      adUnitId: Config.interstitialAdUnitID,
        //adUnitId: InterstitialAd.testAdUnitId,
       listener: (MobileAdEvent event) {
         print("IntAd event is $event");
