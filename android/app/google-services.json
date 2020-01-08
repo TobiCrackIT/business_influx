@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "482760077181",
-    "firebase_url": "https://businessinfluxflutter.firebaseio.com",
-    "project_id": "businessinfluxflutter",
-    "storage_bucket": "businessinfluxflutter.appspot.com"
+    "project_number": "653916355274",
+    "firebase_url": "https://insideoyoapp-7dd3a.firebaseio.com",
+    "project_id": "insideoyoapp-7dd3a",
+    "storage_bucket": "insideoyoapp-7dd3a.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:482760077181:android:7f89346d319a3b6018e614",
+        "mobilesdk_app_id": "1:653916355274:android:530444cac41662f249d233",
         "android_client_info": {
-          "package_name": "com.example.deco_news"
+          "package_name": "com.insideoyo.inside_oyo"
         }
       },
       "oauth_client": [
         {
-          "client_id": "482760077181-qa4fjkhs3trbmmfftunoiuegflhk5v2m.apps.googleusercontent.com",
+          "client_id": "653916355274-dtapijrfd09k6l6d9e13f50r4d3nmh2j.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDLxX7nMMLielhHnCT0D2pwMErufmj84Xw"
+          "current_key": "AIzaSyDWX8vPBLU9CrhVXcSxBsaqnaIzM6IrCjw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "482760077181-qa4fjkhs3trbmmfftunoiuegflhk5v2m.apps.googleusercontent.com",
+              "client_id": "653916355274-dtapijrfd09k6l6d9e13f50r4d3nmh2j.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

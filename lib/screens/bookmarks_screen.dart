@@ -42,7 +42,7 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
 
     /// show no data message
     if (posts.length == 0) {
-      return NoData('Add something to bookmarks by taping on bookmark icon');
+      return NoData('Add something to bookmarks by tapping on the bookmark icon.');
     }
 
     bool isDark = Theme.of(context).brightness == Brightness.dark;

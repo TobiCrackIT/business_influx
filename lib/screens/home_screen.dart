@@ -69,9 +69,9 @@ class _HomeScreenState extends State<HomeScreen> {
             .toList();
 
           categories.sort((a,b)=>b.count.compareTo(a.count));
-          for(var item in categories){
+          /*for(var item in categories){
             print("ID: "+item.id.toString()+" NAME: "+item.name+" COUNT "+item.count.toString());
-          }
+          }*/
           /// disable loading
           isLoading = false;
         });

@@ -1,4 +1,4 @@
-package com.example.deco_news
+package com.insideoyo.inside_oyo
 
 import android.os.Bundle
 

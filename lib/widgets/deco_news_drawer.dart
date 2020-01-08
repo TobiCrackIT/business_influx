@@ -173,7 +173,7 @@ class DecoNewsDrawer extends StatelessWidget {
                     child: InkWell(
                       borderRadius: BorderRadius.circular(50),
                       onTap: () {
-                        _launchURL('https://www.instagram.com/businessinflux/');
+                        _launchURL('https://www.instagram.com/insideoyo/');
                       },
                       child: Icon(
                         DecoNewsIcons.instagram,
@@ -186,7 +186,7 @@ class DecoNewsDrawer extends StatelessWidget {
                     child: InkWell(
                       borderRadius: BorderRadius.circular(50),
                       onTap: () {
-                        _launchURL('https://www.facebook.com/businessinflux/');
+                        _launchURL('https://www.facebook.com/insideoyo/');
 
                       },
                       child: Icon(
@@ -200,7 +200,7 @@ class DecoNewsDrawer extends StatelessWidget {
                     child: InkWell(
                       borderRadius: BorderRadius.circular(50),
                       onTap: () {
-                        _launchURL('https://twitter.com/BusinessInflux');
+                        _launchURL('https://twitter.com/insideoyo');
                       },
                       child: Icon(
                         DecoNewsIcons.twitter,
@@ -213,7 +213,7 @@ class DecoNewsDrawer extends StatelessWidget {
                     child: InkWell(
                       borderRadius: BorderRadius.circular(50),
                       onTap: () {
-                        _launchURL('https://www.youtube.com/channel/UCL7e40QOGHS8pXBHl_wp_sg');
+                        _launchURL('https://www.youtube.com/insideoyo');
                       },
                       child: Icon(
                         DecoNewsIcons.youtube,

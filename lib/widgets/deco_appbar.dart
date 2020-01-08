@@ -8,7 +8,7 @@ class DecoNewsAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   DecoNewsAppBar({
     Key key,
-    this.title = 'BUSINESS INFLUX',
+    this.title = 'INSIDE OYO',
     this.centerTitle = true,
     this.elevation = 2.0,
     this.bottom

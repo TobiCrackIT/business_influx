@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.deco_news">
+    package="com.insideoyo.inside_oyo">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
@@ -10,14 +10,14 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="Business Influx"
+        android:label="Inside Oyo"
         android:icon="@mipmap/ic_launcher">
 
         <!-- Add AdMob app id here -->
         <!--ca-app-pub-4382364672207262~3192802025-->
         <meta-data
                 android:name="com.google.android.gms.ads.APPLICATION_ID"
-                android:value="ca-app-pub-4032939027466706~1152197705"/>
+                android:value="ca-app-pub-1154177750913084~3505528727"/>
 
         <activity
             android:name=".MainActivity"
@@ -32,7 +32,7 @@
                  defined in @style/LaunchTheme). -->
             <meta-data
                 android:name="io.flutter.app.android.SplashScreenUntilFirstFrame"
-                android:value="true" />
+                android:value="false" />
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
