@@ -100,7 +100,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   /// Enables or disables notifications
-  Future<void> _updateNotifications(bool enabled) async {
+  /*Future<void> _updateNotifications(bool enabled) async {
     //DecoNews.of(context).setSubscription(enabled);
-  }
+  }*/
 }

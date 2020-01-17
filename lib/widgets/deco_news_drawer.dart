@@ -3,7 +3,6 @@ import 'package:url_launcher/url_launcher.dart';
 import '../screens/home_screen.dart';
 import '../screens/categories_screen.dart';
 import '../screens/bookmarks_screen.dart';
-import '../screens/about_screen.dart';
 import '../screens/settings_screen.dart';
 import '../deco_news_icons.dart';
 import '../main.dart';

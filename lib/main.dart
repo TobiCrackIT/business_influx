@@ -8,7 +8,6 @@ import 'package:firebase_admob/firebase_admob.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'screens/home_screen.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
-import 'package:flare_splash_screen/flare_splash_screen.dart';
 
 void main() => runApp(DecoNews());
 
@@ -48,7 +47,9 @@ class _DecoNewsState extends State<DecoNews> {
     _initPushNotifications();
     configLocalNotifications();
 
+    print('BUSINESS INFLUX : Initializing OneSignal Notifications');
     /// init AdMob
+    initializeOneSignal();
     _initAdMob();
   }
 
@@ -282,7 +283,8 @@ class _DecoNewsState extends State<DecoNews> {
   }
 
   void initializeOneSignal() async{
-    OneSignal.shared.init('0581e55f-862c-402a-a5cb-43e66cec5b73');
+    //OneSignal.shared.init('0581e55f-862c-402a-a5cb-43e66cec5b73');
+    /*OneSignal.shared.init('12bff220-77f7-4b8b-836e-50eced3d4d31');
 
 
 
@@ -291,91 +293,60 @@ class _DecoNewsState extends State<DecoNews> {
       OneSignal.shared.promptUserForPushNotificationPermission();
     }
 
+    OneSignal.shared.setInFocusDisplayType(OSNotificationDisplayType.notification);*/
+
+    //print("BUSINESS INFLUX: Initializing OneSignal..");
+
+
+    OneSignal.shared.init(
+        "12bff220-77f7-4b8b-836e-50eced3d4d31",
+        iOSSettings: {
+          OSiOSSettings.autoPrompt: true,
+          OSiOSSettings.inAppLaunchUrl: true
+        }
+    );
+
+    //print("BUSINESS INFLUX: Almost done initializing OneSignal..");
     OneSignal.shared.setInFocusDisplayType(OSNotificationDisplayType.notification);
-  }
 
+    OneSignal.shared.setNotificationReceivedHandler((OSNotification notification) {
+      // will be called whenever a notification is received
+      this.setState(() {
+        String _debugLabelString =
+        "Received notification: \n${notification.jsonRepresentation().replaceAll("\\n", "\n")}";
+        print("Notification Received: "+_debugLabelString.toString());
+      });
 
-}
+      //showNotification(json.decode(notification.jsonRepresentation()));
+      showNotification(notification.jsonRepresentation().toString());
 
-class SplashView extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-      color: Colors.white,
-      home: SplashScreen(
-        'images/binsplash.flr',
-        DecoNews(),
-        backgroundColor: Colors.white,
-      )
-    );
-  }
-}
-
-
-/*class SplashScreen extends StatefulWidget {
-  @override
-  _SplashScreenState createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    Future.delayed(Duration(seconds: 2),(){
-      Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => DecoNews(),
-          )
-      );
+      //_handleNotificationReceived(notification);
     });
+
+    OneSignal.shared.setNotificationOpenedHandler((OSNotificationOpenedResult result) {
+      // will be called whenever a notification is opened/button pressed.
+    });
+
+    OneSignal.shared.setPermissionObserver((OSPermissionStateChanges changes) {
+      // will be called whenever the permission changes
+      // (ie. user taps Allow on the permission prompt in iOS)
+    });
+
+    OneSignal.shared.setSubscriptionObserver((OSSubscriptionStateChanges changes) {
+      // will be called whenever the subscription changes
+      //(ie. user gets registered with OneSignal and gets a user ID)
+    });
+
+    OneSignal.shared.setEmailSubscriptionObserver((OSEmailSubscriptionStateChanges emailChanges) {
+      // will be called whenever then user's email subscription changes
+      // (ie. OneSignal.setEmail(email) is called and the user gets registered
+    });
+
   }
 
-  @override
-  Widget build(BuildContext context) {
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            AnimatedCrossFade(
-                firstChild: Container(
-                  child: FlutterLogo(
-                    size: 80,
-                  ),
-                ),
-                secondChild: Container(
-                  child: FlutterLogo(
-                    size: 150,
-                  ),
-                ),
-                crossFadeState: CrossFadeState.showFirst,
-                duration: Duration(seconds: 4)
-            )
-          ],
-        ),
-      ),
-    );
-    *//*return Animator(
-      tween: Tween<double>(begin: 0,end: 300),
-      duration: Duration(seconds: 3),
-      cycles: 1,
-      builder: (anim)=>Center(
-        child: Container(
-          padding: EdgeInsets.symmetric(vertical: 10),
-          height: 50*anim.value,
-          width: 50*anim.value,
-          child: Image.asset('images/bi_logo.png',height: 50,width: 50,),
-        ),
-      ),
-    );*//*
-  }
+}
 
-}*/
 
 
 
