@@ -107,9 +107,6 @@ class _DecoNewsState extends State<DecoNews> {
 
   /// init push notifications
   Future<void> _initPushNotifications() async {
-    //if (!Config.pushNotificationsEnabled) {
-      //return;
-    //}
 
     firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {

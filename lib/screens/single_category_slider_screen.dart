@@ -83,7 +83,7 @@ class _SingleCategorySliderScreenState
         ..show();
     });
 
-    if(noOfClicks==4){
+    if(noOfClicks==3){
 
 
       myInterstitial

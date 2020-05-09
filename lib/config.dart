@@ -1,5 +1,3 @@
-import 'package:firebase_admob/firebase_admob.dart';
-
 class Config {
 
   /// Define your WordPress API url here
@@ -23,6 +21,6 @@ class Config {
   static final adMobPosition = 'bottom';
   static final interstitialAdUnitID='ca-app-pub-1154177750913084/5644606901';
   static final bannerAdUnitID='ca-app-pub-1154177750913084/8913768072';
-  static final nativeAdUnitID='ca-app-pub-4032939027466706/4205983878';
+  static final nativeAdUnitID='ca-app-pub-1154177750913084/1399762644';
   static final nativeTestAdUnitID='ca-app-pub-3940256099942544/2247696110';
 }
